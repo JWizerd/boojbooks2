@@ -44,7 +44,9 @@ class BooksController extends Controller
     public function addBook(Request $request)
     {
         if($request->validate($this->rules())) {
-            Book::create($request->all());
+            Author::findOrFail($request->get('author_id'))
+                ->book()
+                ->create($request->all());
         }
 
         session()->flash('status', 'Book Added!');
