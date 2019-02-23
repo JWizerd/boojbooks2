@@ -1,3 +1,14 @@
+<?php
+/**
+ * ========================================================
+ * User enumeration handling and a lock policy could be implemented to improve security.
+ *
+ * @link https://www.itprotoday.com/security/using-account-lockout-policies-hinder-attacks-your-systems
+ * @link https://blog.rapid7.com/2017/06/15/about-user-enumeration/
+ * ========================================================
+ */
+?>
+
 @extends('layouts.app')
 
 @section('content')

@@ -13,6 +13,13 @@
     <!-- Javascript -->
     <script src="/js/jquery-3.3.1.js"></script>
 
+    <?php
+    /**
+     * ========================================================
+     * To eliminate unnecessary additional http requests, load fonts and js libraries locally
+     * ========================================================
+     */
+    ?>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">

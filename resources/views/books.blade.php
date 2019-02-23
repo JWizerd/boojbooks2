@@ -9,7 +9,14 @@
                     {{ session('status') }}
                 </div>
             @endif
-
+            <?php
+            /**
+             * ========================================================
+             * Errors should be displayed here when validation failures occur
+             * @link https://laravel.com/docs/5.7/validation#quick-displaying-the-validation-errors
+             * ========================================================
+             */
+            ?>
             <div class="card">
                 <div class="card-header">Add Book</div>
 

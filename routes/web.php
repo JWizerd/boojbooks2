@@ -17,8 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/**
+ * Use '/' instead of '/home' since '/' typically represents the home page
+ */
 Route::get('/home', 'HomeController@index')->name('home');
 
+/**
+ * ========================================================
+ * Routes should be refactored to use the new Controllers,
+ * as mentioned in HomeController.php comments i.e.
+ * Route::post('/authors', 'AuthorController@addAuthor');
+ * ========================================================
+ */
 Route::get('/authors', 'HomeController@authors')->name('authors');
 Route::post('/authors', 'HomeController@addAuthor');
 Route::get('/authors/delete/{id}', 'HomeController@deleteAuthor');
