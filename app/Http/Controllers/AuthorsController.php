@@ -19,6 +19,20 @@ class AuthorsController extends Controller
     }
 
     /**
+     * validation rules
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => 'bail|required|string|max:255',
+            'birthday' => 'required|date:YYYY-MM-DD',
+            'biography' => 'required|string'
+        ];
+    }
+
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -35,16 +49,18 @@ class AuthorsController extends Controller
         return view('authors', compact('authors'));
     }
 
-    public function addAuthor(Request $request);
+    public function addAuthor(Request $request)
     {
-        $author = new Author;
-        $author->name = $request->input('name');
-        $author->birthday = $request->input('birthday');
-        $author->biography = $request->input('biography');
-        $author->save();
+        if($request->validate($this->rules())) {
+            $author = new Author;
+            $author->name = $request->input('name');
+            $author->birthday = $request->input('birthday');
+            $author->biography = $request->input('biography');
+            $author->save();
 
-        session()->flash('status', 'Author Added!');
-        return redirect('authors');
+            session()->flash('status', 'Author Added!');
+            return redirect('authors');
+        }
     }
 
     public function deleteAuthor($author_id)
