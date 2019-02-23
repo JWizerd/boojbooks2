@@ -16,7 +16,7 @@ class AuthorsController extends Controller
     public function rules()
     {
         return [
-            'name' => 'bail|required|string|max:255',
+            'name' => 'bail|unique:authors,name|required|string|max:255',
             'birthday' => 'required|date:YYYY-MM-DD',
             'biography' => 'required|string'
         ];
@@ -34,6 +34,9 @@ class AuthorsController extends Controller
         if($request->validate($this->rules())) {
             Author::create($request->all());
         }
+
+        session()->flash('status', 'Author Added!');
+        return redirect('authors');
     }
 
     public function deleteAuthor($author_id)
