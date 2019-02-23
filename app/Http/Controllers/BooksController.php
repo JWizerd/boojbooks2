@@ -18,6 +18,22 @@ class BooksController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * validation rules
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'title' => 'bail|required|string|max:255',
+            'publication_date' => 'required|date:YYYY-MM-DD',
+            'description' => 'required|string',
+            'pages' => 'required|integer',
+            'author_id' => 'required|integer'
+        ];
+    }
+
     public function books()
     {
         $books = Book::all();
@@ -25,15 +41,11 @@ class BooksController extends Controller
         return view('books', compact('books'));
     }
 
-    public function addBook()
+    public function addBook(Request $request)
     {
-        $book = new Book;
-        $book->title = $_POST['title'];
-        $book->author_id = $_POST['author_id'];
-        $book->publication_date = $_POST['publication_date'];
-        $book->description = $_POST['description'];
-        $book->pages = $_POST['pages'];
-        $book->save();
+        if($request->validate($this->rules())) {
+            Book::create($request->all());
+        }
 
         session()->flash('status', 'Book Added!');
         return redirect('books');
@@ -41,7 +53,7 @@ class BooksController extends Controller
 
     public function deleteBook($book_id)
     {
-        DB::table('books')->where('id', $book_id)->delete();
+        Book::destroy($book_id);
 
         session()->flash('status', 'Book Deleted!');
         return redirect('books');

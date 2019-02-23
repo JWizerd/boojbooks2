@@ -9,16 +9,6 @@ use App\Author;
 class AuthorsController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * validation rules
      *
      * @return array
@@ -32,16 +22,6 @@ class AuthorsController extends Controller
         ];
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('home');
-    }
-
     public function authors()
     {
         $authors = Author::all();
@@ -52,20 +32,13 @@ class AuthorsController extends Controller
     public function addAuthor(Request $request)
     {
         if($request->validate($this->rules())) {
-            $author = new Author;
-            $author->name = $request->input('name');
-            $author->birthday = $request->input('birthday');
-            $author->biography = $request->input('biography');
-            $author->save();
-
-            session()->flash('status', 'Author Added!');
-            return redirect('authors');
+            Author::create($request->all());
         }
     }
 
     public function deleteAuthor($author_id)
     {
-        DB::table('authors')->where('id', $author_id)->delete();
+        Author::destroy($author_id);
 
         session()->flash('status', 'Author Deleted!');
         return redirect('authors');
