@@ -35,12 +35,12 @@ class AuthorsController extends Controller
         return view('authors', compact('authors'));
     }
 
-    public function addAuthor()
+    public function addAuthor(Request $request);
     {
         $author = new Author;
-        $author->name = $_POST['name'];
-        $author->birthday = $_POST['birthday'];
-        $author->biography = $_POST['biography'];
+        $author->name = $request->input('name');
+        $author->birthday = $request->input('birthday');
+        $author->biography = $request->input('biography');
         $author->save();
 
         session()->flash('status', 'Author Added!');
