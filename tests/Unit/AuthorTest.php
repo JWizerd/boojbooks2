@@ -9,26 +9,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthorTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
-     * A basic test example.
+     * test creation of author
      *
      * @return void
      */
-    public function testCreatesAuthor()
+    public function testCreate()
     {
-        $testUser = 'unitTestUser';
-
-        // given
-        Author::create([
-            'name' => $testUser,
-            'birthday' => '1111-11-11',
-            'biography' => 'test biography'
-        ]);
-
-        $this->assertDatabaseHas('authors', [
-            'name' => $testUser
-        ]);
+        $author = factory(Author::class)->create();
+        $this->assertDatabaseHas('authors', ['name' => $author->name]);
     }
 }

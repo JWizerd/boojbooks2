@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Book;
+
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -9,12 +11,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class BookTest extends TestCase
 {
     /**
-     * A basic test example.
+     * test creation of book
      *
      * @return void
      */
-    public function testExample()
+    public function testCreate()
     {
-        $this->assertTrue(true);
+        $book = factory(Book::class)->create();
+        $this->assertDatabaseHas('books', ['title' => $book->title]);
     }
 }

@@ -38,6 +38,8 @@ use App\Book;
  *
  * 4. Utilize Illuminate\Http\Request instead of $_POST. It's provides a supportive abstraction that makes it
  * easier to manage request data and also helps prevent simple fatal errors like undefined indexes.
+ *
+ * 5. Full CRUD operations aren't supported in this controller. Implement update action.
  * ========================================================
  */
 
