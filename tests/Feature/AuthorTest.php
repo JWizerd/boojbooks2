@@ -13,6 +13,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class AuthorTest extends TestCase
 {
     use DatabaseTransactions;
+    use WithoutMiddleware;
 
     /**
      * test acceptance creation of author
@@ -24,7 +25,8 @@ class AuthorTest extends TestCase
         $request = factory(Author::class)->make()->toArray();
         $response = $this->post('/authors', $request);
         $this->assertDatabaseHas('authors', ['name' => $request['name']]);
-        $response->assertStatus(302);
+        $response->assertStatus(200);
+        $response->assertSee('Author Added!');
     }
 
     /**

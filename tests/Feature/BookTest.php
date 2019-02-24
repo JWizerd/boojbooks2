@@ -31,7 +31,8 @@ class BookTest extends TestCase
         $response = $this->post('/books', $request);
 
         $this->assertDatabaseHas('books', ['title' => $request['title']]);
-        $response->assertStatus(302);
+        $response->assertStatus(200);
+        $response->assertSee('Book Added!');
     }
 
     /**
@@ -62,7 +63,7 @@ class BookTest extends TestCase
         $book = factory(Book::class)->create();
 
         $response = $this->get('/books', ['id' => $book->id]);
-        $response->assertStatus(302);
+        $response->assertStatus(200);
         $response->assertSee('Book Deleted!');
     }
 }
