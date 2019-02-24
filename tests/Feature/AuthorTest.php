@@ -14,16 +14,6 @@ class AuthorTest extends TestCase
     use WithoutMiddleware;
 
     /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
-    /**
      * test acceptance creation of author
      *
      * @return void
