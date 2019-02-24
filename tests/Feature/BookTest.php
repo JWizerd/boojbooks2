@@ -41,14 +41,14 @@ class BookTest extends TestCase
      */
     public function testGet()
     {
-        $authors = factory(Book::class, 2)->create();
+        $books = factory(Book::class, 2)->create();
 
         $response = $this->get('/books');
-            $response->assertStatus(200);
+        $response->assertStatus(200);
 
         array_map(function($book) use ($response) {
             $response->assertSee($book->name);
-        }, $book->all());
+        }, $books->all());
     }
 
     /**
