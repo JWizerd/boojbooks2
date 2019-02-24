@@ -13,7 +13,6 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 class BookTest extends TestCase
 {
     use WithoutMiddleware;
-    use RefreshDatabase;
 
     /**
      * test acceptance creation of author
