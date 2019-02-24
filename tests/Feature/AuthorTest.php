@@ -12,7 +12,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthorTest extends TestCase
 {
-    use WithoutMiddleware;
     use DatabaseTransactions;
 
     /**
@@ -25,7 +24,7 @@ class AuthorTest extends TestCase
         $request = factory(Author::class)->make()->toArray();
         $response = $this->post('/authors', $request);
         $this->assertDatabaseHas('authors', ['name' => $request['name']]);
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 
     /**
@@ -38,6 +37,7 @@ class AuthorTest extends TestCase
         $authors = factory(Author::class, 2)->create();
 
         $response = $this->get('/authors');
+
         $response->assertStatus(200);
 
         array_map(function($author) use ($response) {
@@ -56,6 +56,5 @@ class AuthorTest extends TestCase
 
         $response = $this->get('/authors', ['id' => $author->id]);
         $response->assertStatus(200);
-        $response->assertSee('Author Deleted!');
     }
 }
