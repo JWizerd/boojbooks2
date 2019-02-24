@@ -85,11 +85,12 @@ class HomeController extends Controller
 
         return view('authors', compact('authors'));
     }
-    public function addAuthor()
+    public function addAuthor(Request $request)
     {
         // 1. Don't use $_POST use Request, more support and more readable
         // 2. validate incoming data
         // 3. if all fields have validation, utilize Request::all()
+        // 4. tests will always fail because we aren't using the Request object
         $author = new Author;
         $author->name = $_POST['name'];
         $author->birthday = $_POST['birthday'];
