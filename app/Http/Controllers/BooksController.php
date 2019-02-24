@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Book;
+use App\Author;
+use \Exception;
 
 class BooksController extends Controller
 {
@@ -44,12 +46,15 @@ class BooksController extends Controller
     public function addBook(Request $request)
     {
         if($request->validate($this->rules())) {
-            Author::findOrFail($request->get('author_id'))
-                ->book()
-                ->create($request->all());
+            try {
+                $author = Author::findOrFail($request->get('author_id'));
+                Book::create($request->all());
+                session()->flash('status', 'Book Added!');
+            } catch (Exception $e) {
+                session()->flash('status', $e->getMessage());
+            }
         }
 
-        session()->flash('status', 'Book Added!');
         return redirect('books');
     }
 
