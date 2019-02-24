@@ -19,28 +19,4 @@ class HomeTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('BoojBooks');
     }
-
-    /**
-     * Index http test
-     *
-     * @return void
-     */
-    public function testLogin()
-    {
-        $response = $this->get('/login');
-        $response->assertStatus(200);
-        $response->assertSee('Login');
-    }
-
-    /**
-     * Index http test
-     *
-     * @return void
-     */
-    public function testRegister()
-    {
-        $response = $this->get('/register');
-        $response->assertStatus(200);
-        $response->assertSee('Register');
-    }
 }
