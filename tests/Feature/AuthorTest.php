@@ -56,5 +56,6 @@ class AuthorTest extends TestCase
 
         $response = $this->get('/authors', ['id' => $author->id]);
         $response->assertStatus(200);
+        $response->assertSee('Author Deleted!');
     }
 }
