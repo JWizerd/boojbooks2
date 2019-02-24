@@ -13,8 +13,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class BookTest extends TestCase
 {
-    use WithoutMiddleware;
     use DatabaseTransactions;
+    use WithoutMiddleware;
 
     /**
      * test acceptance creation of author
@@ -31,7 +31,7 @@ class BookTest extends TestCase
         $response = $this->post('/books', $request);
 
         $this->assertDatabaseHas('books', ['title' => $request['title']]);
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 
     /**
@@ -44,10 +44,11 @@ class BookTest extends TestCase
         $books = factory(Book::class, 2)->create();
 
         $response = $this->get('/books');
+
         $response->assertStatus(200);
 
         array_map(function($book) use ($response) {
-            $response->assertSee($book->name);
+            $response->assertSee($book->title);
         }, $books->all());
     }
 
@@ -61,7 +62,7 @@ class BookTest extends TestCase
         $book = factory(Book::class)->create();
 
         $response = $this->get('/books', ['id' => $book->id]);
-        $response->assertStatus(200);
+        $response->assertStatus(302);
         $response->assertSee('Book Deleted!');
     }
 }
